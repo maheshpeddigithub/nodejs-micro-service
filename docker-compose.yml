@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   order-service:
@@ -6,6 +6,10 @@ services:
     image: order-service
     depends_on:
       - customer-service
+      - product-service
+    environment:
+      - CUSTOMER_SERVICE_HOST=customer-service
+      - PRODUCT_SERVICE_HOST=product-service
     ports:
       - 9000:9000
 
@@ -14,3 +18,9 @@ services:
     image: customer-service
     ports:
       - 9090:9090
+
+  product-service:
+    container_name: product-service
+    image: product-service
+    ports:
+      - 9091:9091

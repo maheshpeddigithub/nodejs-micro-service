@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  customer-service:
+    container_name: product-service
+    image: product-service
+    ports:
+      - 9091:9091

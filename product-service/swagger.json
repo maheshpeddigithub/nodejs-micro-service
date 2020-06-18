@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Customer API",
-    "description": "Custoemr API to get customer details",
+    "title": "Product API",
+    "description": "Product API to get product details",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -12,46 +12,46 @@
   "basePath": "/api/v1",
   "tags": [
     {
-      "name": "Customer",
-      "description": "API for customers in the system"
+      "name": "Product",
+      "description": "API for products in the system"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/customer": {
+    "/product": {
       "get": {
-        "tags": ["Customer"],
-        "summary": "Get all customers in system",
+        "tags": ["Product"],
+        "summary": "Get all products in system",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Customers"
+              "$ref": "#/definitions/Products"
             }
           }
         }
       }
     },
-    "/customer/{id}": {
+    "/product/{id}": {
       "parameters": [
         {
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of customer that we want to find",
+          "description": "ID of product that we want to find",
           "type": "number"
         }
       ],
       "get": {
-        "tags": ["Customer"],
-        "summary": "Get customer with given ID",
+        "tags": ["Product"],
+        "summary": "Get product with given ID",
         "responses": {
           "200": {
-            "description": "Customer is found",
+            "description": "Product is found",
             "schema": {
-              "$ref": "#/definitions/Customer"
+              "$ref": "#/definitions/Product"
             }
           }
         }
@@ -59,8 +59,8 @@
     }
   },
   "definitions": {
-    "Customer": {
-      "required": ["id", "name", "active"],
+    "Product": {
+      "required": ["id", "name"],
       "properties": {
         "id": {
           "type": "number",
@@ -68,15 +68,12 @@
         },
         "name": {
           "type": "string"
-        },
-        "active": {
-          "type": "boolean"
         }
       }
     },
-    "Customers": {
+    "Products": {
       "type": "array",
-      "$ref": "#/definitions/Customer"
+      "$ref": "#/definitions/Product"
     }
   }
 }

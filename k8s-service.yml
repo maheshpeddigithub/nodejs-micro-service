@@ -18,9 +18,27 @@ spec:
           image: eu.gcr.io/ssil1-258911/customer-service:v1
           ports:
             - containerPort: 9090
-          env:
-            - name: PORT
-              value: "9090"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  selector:
+    matchLabels:
+      app: product-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-service
+        env: development
+    spec:
+      containers:
+        - name: product-service
+          image: eu.gcr.io/ssil1-258911/product-service:v1
+          ports:
+            - containerPort: 9091
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,8 +61,10 @@ spec:
           ports:
             - containerPort: 9000
           env:
-            - name: PORT
-              value: "9000"
+            - name: CUSTOMER_SERVICE_HOST
+              value: "customer-service"
+            - name: PRODUCT_SERVICE_HOST
+              value: "product-service"
 ---
 apiVersion: v1
 kind: Service
@@ -58,6 +78,19 @@ spec:
     protocol: TCP
   selector:
     app: customer-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9091
+    targetPort: 9091
+    protocol: TCP
+  selector:
+    app: product-service
 ---
 apiVersion: v1
 kind: Service

@@ -9,50 +9,90 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:9000",
   "basePath": "/api/v1",
   "tags": [
     {
-      "name": "Order",
-      "description": "API for Orders in the system"
+      "name": "Customer",
+      "description": "API for Customers in the system"
+    },
+    {
+      "name": "Product",
+      "description": "API for Products in the system"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/order": {
+    "/order/customer": {
       "get": {
-        "tags": ["Order"],
-        "summary": "Get all orders in system",
+        "tags": ["Customer"],
+        "summary": "Get all customers in system",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Orders"
+              "$ref": "#/definitions/Customers"
             }
           }
         }
       }
     },
-    "/order/{id}": {
+    "/order/customer/{id}": {
       "parameters": [
         {
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of order that we want to find",
+          "description": "ID of customer that we want to find",
           "type": "number"
         }
       ],
       "get": {
-        "tags": ["Order"],
-        "summary": "Get order with given ID",
+        "tags": ["Customer"],
+        "summary": "Get customer with given ID",
         "responses": {
           "200": {
-            "description": "Order is found",
+            "description": "Customer is found",
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    },
+    "/order/product": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get all products in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
+    },
+    "/order/product/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of product that we want to find",
+          "type": "number"
+        }
+      ],
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get product with given ID",
+        "responses": {
+          "200": {
+            "description": "Product is found",
+            "schema": {
+              "$ref": "#/definitions/Product"
             }
           }
         }
@@ -60,7 +100,7 @@
     }
   },
   "definitions": {
-    "Order": {
+    "Customer": {
       "required": ["id", "name", "active"],
       "properties": {
         "id": {
@@ -75,9 +115,25 @@
         }
       }
     },
-    "Orders": {
+    "Customers": {
       "type": "array",
-      "$ref": "#/definitions/Order"
+      "$ref": "#/definitions/Customer"
+    },
+    "Product": {
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Products": {
+      "type": "array",
+      "$ref": "#/definitions/Product"
     }
   }
 }
