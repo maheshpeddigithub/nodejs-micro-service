@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  selector:
+    matchLabels:
+      app: order-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: order-service
+        env: development
+    spec:
+      containers:
+        - name: order-service
+          image: eu.gcr.io/ssil1-258911/order-service:v1
+          ports:
+            - containerPort: 9000
+          env:
+            - name: PORT
+              value: "9000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+  selector:
+    app: order-service

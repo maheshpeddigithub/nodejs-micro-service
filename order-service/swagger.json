@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Order API",
+    "description": "Order API to get order details",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:9000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Order",
+      "description": "API for Orders in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/order": {
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get all orders in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Orders"
+            }
+          }
+        }
+      }
+    },
+    "/order/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of order that we want to find",
+          "type": "number"
+        }
+      ],
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get order with given ID",
+        "responses": {
+          "200": {
+            "description": "Order is found",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Order": {
+      "required": ["id", "name", "active"],
+      "properties": {
+        "id": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Orders": {
+      "type": "array",
+      "$ref": "#/definitions/Order"
+    }
+  }
+}
