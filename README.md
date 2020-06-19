@@ -3,13 +3,19 @@ NodeJS commands
 
 npm init -y
 
-npm install express body-parser cors mongoose swagger-ui-express superagent
+sudo npm install -g nodemon jest
+
+npm install express body-parser cors mongoose swagger-ui-express superagent supertest
 
 
-Launching nodejs app from command prompt
-----------------------------------------
+Integration tests execution
+---------------------------
 
-sudo npm install -g nodemon
+jest
+
+
+Launching nodejs app
+--------------------
 
 nodemon server.js
 
