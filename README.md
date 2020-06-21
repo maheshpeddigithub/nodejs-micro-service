@@ -72,6 +72,14 @@ docker push eu.gcr.io/ssil1-258911/customer-service:v1
 docker push eu.gcr.io/ssil1-258911/product-service:v1
 
 
+List / Delete images from registry:
+-----------------------------------
+
+gcloud container images list --repository=eu.gcr.io/ssil1-258911
+
+gcloud container images delete eu.gcr.io/ssil1-258911/customer-service:v1 eu.gcr.io/ssil1-258911/order-service:v1 eu.gcr.io/ssil1-258911/product-service:v1
+
+
 K8S executin (GKE):
 -------------------
 

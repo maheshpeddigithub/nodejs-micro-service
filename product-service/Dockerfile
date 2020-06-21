@@ -1,19 +1,22 @@
-FROM node:latest
+# Use the official lightweight Node.js 12 image.
+# https://hub.docker.com/_/node
+FROM node:12-slim
 
-# Create app directory
+# Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
 COPY package*.json ./
 
-RUN npm install
-# If you are building your code for production
+# Install dependencies.
+# If you add a package-lock.json speed your build by switching to 'npm ci'.
 # RUN npm ci --only=production
+RUN npm install --production
 
-# Bundle app source
-COPY . .
+# Copy local code to the container image.
+COPY . ./
 
-EXPOSE 9091
-CMD [ "node", "server.js" ]
+# Run the web service on container startup.
+CMD ["node", "server.js"]
