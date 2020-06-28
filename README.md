@@ -80,7 +80,7 @@ gcloud container images list --repository=eu.gcr.io/ssil1-258911
 gcloud container images delete eu.gcr.io/ssil1-258911/customer-service:v1 eu.gcr.io/ssil1-258911/order-service:v1 eu.gcr.io/ssil1-258911/product-service:v1
 
 
-K8S executin (GKE):
+K8S execution (GKE):
 -------------------
 
 gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2  --zone europe-west2-b --cluster-version latest test-cluster

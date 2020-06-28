@@ -31,6 +31,11 @@ const customers = [
     name: "Steve",
     active: true,
   },
+  {
+    id: 6,
+    name: "SteveJobs",
+    active: true,
+  }
 ];
 
 // methods

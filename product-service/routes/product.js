@@ -26,6 +26,10 @@ const products = [
     id: 5,
     name: "Budweiser"
   },
+  {
+    id: 6,
+    name: "StellaArtios"
+  }
 ];
 
 // methods
